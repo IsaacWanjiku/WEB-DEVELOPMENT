@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Javascript</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        .form-group {
+            margin-bottom: 15px;
+        }
+        label {
+            display: block;
+            margin-bottom: 5px;
+        }
+        input[type="number"] {
+            width: 20%;
+            padding: 8px;
+            box-sizing: border-box;
+        }
+        .result {
+            margin-top: 20px;
+            font-size: 1.2em;
+            font-weight: bold;
+        }
+    </style>
+    <script>
+        function calculateTotal() {
+            const mathMarks = parseFloat(document.getElementById('maths').value) || 0;
+            const englishMarks = parseFloat(document.getElementById('english').value) || 0;
+            const kiswahiliMarks = parseFloat(document.getElementById('kiswahili').value) || 0;
+            
+            const totalMarks = mathMarks + englishMarks + kiswahiliMarks;
+            
+            document.getElementById('total').textContent = 'Total Marks: ' + totalMarks;
+        }
+    </script>
+</head>
+<body>
+    <h1>Enter Marks for each subject</h1>
+    <form onsubmit="event.preventDefault(); calculateTotal();">
+        <div class="form-group">
+            <label for="maths">Maths Marks:</label>
+            <input type="number" id="maths" name="maths" min="0" max="100" required>
+        </div>
+        <div class="form-group">
+            <label for="english">English Marks:</label>
+            <input type="number" id="english" name="english" min="0" max="100" required>
+        </div>
+        <div class="form-group">
+            <label for="kiswahili">Kiswahili Marks:</label>
+            <input type="number" id="kiswahili" name="kiswahili" min="0" max="100" required>
+        </div>
+        <button type="submit">Calculate Total</button>
+    </form>
+    <div class="result" id="total">Total Marks: 0</div>
+</body>
+</html>
