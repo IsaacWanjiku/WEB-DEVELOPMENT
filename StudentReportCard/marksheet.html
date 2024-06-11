@@ -1,0 +1,171 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Student Report Card</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f2f2f2;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+        }
+        .container h1 {
+            text-align: center;
+            margin-bottom: 20px;
+        }
+        .container input {
+            width: calc(100% - 20px);
+            padding: 10px;
+            margin: 10px 0;
+            border: 1px solid #ccc;
+            border-radius: 4px;
+        }
+        .container button {
+            width: 100%;
+            padding: 10px;
+            background-color: #28a745;
+            color: #fff;
+            border: none;
+            border-radius: 4px;
+            cursor: pointer;
+        }
+        .container button:hover {
+            background-color: #218838;
+        }
+        .report-card {
+            margin-top: 20px;
+            display: none;
+        }
+        .report-card h2 {
+            text-align: center;
+        }
+        .report-card table {
+            width: 100%;
+            border-collapse: collapse;
+            margin: 10px 0;
+        }
+        .report-card table, .report-card th, .report-card td {
+            border: 1px solid #ccc;
+        }
+        .report-card th, .report-card td {
+            padding: 8px;
+            text-align: left;
+        }
+    </style>
+</head>
+<body>
+
+<div class="container">
+    <h1>Student Report Card</h1>
+    <form id="reportForm">
+        <input type="text" id="studentName" placeholder="Student Name" required>
+        <input type="text" id="rollNumber" placeholder="Roll Number" required>
+        <input type="text" id="class" placeholder="Class" required>
+        <input type="text" id="school" placeholder="School" required>
+        <input type="number" id="mathMarks" placeholder="Math Marks" required>
+        <input type="number" id="scienceMarks" placeholder="Science Marks" required>
+        <input type="number" id="englishMarks" placeholder="English Marks" required>
+        <input type="number" id="historyMarks" placeholder="History Marks" required>
+        <input type="number" id="peMarks" placeholder="Physical Education Marks" required>
+        <button type="button" onclick="generateReportCard()">Generate Report Card</button>
+    </form>
+
+    <div class="report-card" id="reportCard">
+        <h2>Report Card</h2>
+        <p><strong>Student Name:</strong> <span id="rStudentName"></span></p>
+        <p><strong>Roll Number:</strong> <span id="rRollNumber"></span></p>
+        <p><strong>Class:</strong> <span id="rClass"></span></p>
+        <p><strong>School:</strong> <span id="rSchool"></span></p>
+        <table>
+            <thead>
+                <tr>
+                    <th>Subject</th>
+                    <th>Marks</th>
+                </tr>
+            </thead>
+            <tbody>
+                <tr>
+                    <td>Math</td>
+                    <td id="rMathMarks"></td>
+                </tr>
+                <tr>
+                    <td>Science</td>
+                    <td id="rScienceMarks"></td>
+                </tr>
+                <tr>
+                    <td>English</td>
+                    <td id="rEnglishMarks"></td>
+                </tr>
+                <tr>
+                    <td>History</td>
+                    <td id="rHistoryMarks"></td>
+                </tr>
+                <tr>
+                    <td>Physical Education</td>
+                    <td id="rPEMarks"></td>
+                </tr>
+            </tbody>
+        </table>
+        <p><strong>Average Grade:</strong> <span id="averageGrade"></span></p>
+        <p><strong>Recommendation:</strong> <span id="recommendation"></span></p>
+    </div>
+</div>
+
+<script>
+    function generateReportCard() {
+        // Get form values
+        const studentName = document.getElementById('studentName').value;
+        const rollNumber = document.getElementById('rollNumber').value;
+        const className = document.getElementById('class').value;
+        const school = document.getElementById('school').value;
+        const mathMarks = parseFloat(document.getElementById('mathMarks').value);
+        const scienceMarks = parseFloat(document.getElementById('scienceMarks').value);
+        const englishMarks = parseFloat(document.getElementById('englishMarks').value);
+        const historyMarks = parseFloat(document.getElementById('historyMarks').value);
+        const peMarks = parseFloat(document.getElementById('peMarks').value);
+
+        // Calculate average marks
+        const averageMarks = (mathMarks + scienceMarks + englishMarks + historyMarks + peMarks) / 5;
+        let recommendation;
+
+        // Determine recommendation
+        if (averageMarks >= 90) {
+            recommendation = 'Excellent work! Keep it up!';
+        } else if (averageMarks >= 75) {
+            recommendation = 'Good job! A bit more effort and you will excel.';
+        } else {
+            recommendation = 'Needs improvement. Work harder!';
+        }
+
+        // Update report card
+        document.getElementById('rStudentName').innerText = studentName;
+        document.getElementById('rRollNumber').innerText = rollNumber;
+        document.getElementById('rClass').innerText = className;
+        document.getElementById('rSchool').innerText = school;
+        document.getElementById('rMathMarks').innerText = mathMarks;
+        document.getElementById('rScienceMarks').innerText = scienceMarks;
+        document.getElementById('rEnglishMarks').innerText = englishMarks;
+        document.getElementById('rHistoryMarks').innerText = historyMarks;
+        document.getElementById('rPEMarks').innerText = peMarks;
+        document.getElementById('averageGrade').innerText = averageMarks.toFixed(2);
+        document.getElementById('recommendation').innerText = recommendation;
+
+        // Show report card
+        document.getElementById('reportCard').style.display = 'block';
+    }
+</script>
+
+</body>
+</html>
